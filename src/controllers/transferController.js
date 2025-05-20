@@ -16,7 +16,8 @@ export const transfering = async (req, res) => {
         if (sender.balance < amount) {
             await session.abortTransaction();
             session.endSession()
-            res.status.json({ message: "insifienct balance" });
+            return res.status(400).json({ message: "Insufficient balance" });
+
         };
         sender.balance -= amount;
         reciever.balance += amount;
